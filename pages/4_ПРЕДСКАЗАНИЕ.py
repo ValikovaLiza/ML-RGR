@@ -36,6 +36,10 @@ if data is not None:
             if model_type == "Knn":
                 with open('models/knn.pkl', 'rb') as file:
                     knn_model = pickle.load(file)
+                if knn_model.predict(list) == 0:
+                    st.success("Пожарной тревоги не будет")
+                else:
+                    st.success("Пожарная тревога будет")
 
             elif model_type == "Kmeans":
                 with open('models/kmeans.pkl', 'rb') as file:
