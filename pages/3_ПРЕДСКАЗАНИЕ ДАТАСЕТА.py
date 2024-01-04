@@ -63,26 +63,26 @@ if data is not None:
             if model_type == "Выберите модель":
                 st.write('Для получения предсказания')
             elif model_type == "Knn":
-                    with open('knn.pkl', 'rb') as file:
+                    with open('models/knn.pkl', 'rb') as file:
                         knn_model = pickle.load(file)
                     Prediction(knn_model)
             elif model_type == "Kmeans":
-                    with open('kmeans.pkl', 'rb') as file:
+                    with open('models/kmeans.pkl', 'rb') as file:
                         kmeans_model = pickle.load(file)
                     Prediction(kmeans_model)
             elif model_type == "Boosting":
-                    with open('boosting.pkl', 'rb') as file:
+                    with open('models/boosting.pkl', 'rb') as file:
                         boos_model = pickle.load(file)
                     Prediction(boos_model)
             elif model_type == "Bagging":
-                    with open('bagging.pkl', 'rb') as file:
+                    with open('models/bagging.pkl', 'rb') as file:
                         bagg_model = pickle.load(file)
                     Prediction(bagg_model)
             elif model_type == "Stacking":
-                    with open('stacking.pkl', 'rb') as file:
+                    with open('models/stacking.pkl', 'rb') as file:
                         stac_model = pickle.load(file)
                     Prediction(stac_model)
             elif model_type == "MLP":
-                    with open('mlp.pkl', 'rb') as file:
+                    with open('models/mlp.pkl', 'rb') as file:
                         mlp_model = pickle.load(file)
                     Prediction(mlp_model)
