@@ -5,5 +5,5 @@ pandas
 scikit-learn == 1.2.2
 imblearn
 cvxopt
-tensorflow
+tensorflow == 2.15.0
 scipy
