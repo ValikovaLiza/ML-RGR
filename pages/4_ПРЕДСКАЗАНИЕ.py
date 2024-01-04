@@ -34,11 +34,11 @@ if data is not None:
     if button_clicked:
         if model_type is not None:
             if model_type == "Knn":
-                with open('knn.pkl', 'rb') as file:
+                with open('models/knn.pkl', 'rb') as file:
                     knn_model = pickle.load(file)
 
             elif model_type == "Kmeans":
-                with open('kmeans.pkl', 'rb') as file:
+                with open('models/kmeans.pkl', 'rb') as file:
                     kmeans_model = pickle.load(file)
                 if kmeans_model.predict(list) == 0:
                     st.success("Пожарной тревоги не будет")
@@ -46,7 +46,7 @@ if data is not None:
                     st.success("Пожарная тревога будет")
 
             elif model_type == "Boosting":
-                with open('boosting.pkl', 'rb') as file:
+                with open('models/boosting.pkl', 'rb') as file:
                     boos_model = pickle.load(file)
                 if boos_model.predict(list) == 0:
                     st.success("Пожарной тревоги не будет")
@@ -54,7 +54,7 @@ if data is not None:
                     st.success("Пожарная тревога будет")
 
             elif model_type == "Bagging":
-                with open('bagging.pkl', 'rb') as file:
+                with open('models/bagging.pkl', 'rb') as file:
                     bagg_model = pickle.load(file)
                 if bagg_model.predict(list) == 0:
                     st.success("Пожарной тревоги не будет")
@@ -62,7 +62,7 @@ if data is not None:
                     st.success("Пожарная тревога будет")
 
             elif model_type == "Stacking":
-                with open('stacking.pkl', 'rb') as file:
+                with open('models/stacking.pkl', 'rb') as file:
                     stac_model = pickle.load(file)
                 if stac_model.predict(list) == 0:
                     st.success("Пожарной тревоги не будет")
@@ -70,7 +70,7 @@ if data is not None:
                     st.success("Пожарная тревога будет")
 
             elif model_type == "MLP":
-                with open('mlp.pkl', 'rb') as file:
+                with open('models/mlp.pkl', 'rb') as file:
                     mlp_model = pickle.load(file)
                 if mlp_model.predict(list) == 0:
                     st.success("Пожарной тревоги не будет")
