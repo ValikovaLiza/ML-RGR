@@ -1,25 +1,24 @@
 import pandas as pd 
 import numpy as np 
 import pickle
-import time
-from sklearn.linear_model import LinearRegression
 import streamlit as st 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from imblearn.under_sampling import NearMiss 
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+import io
 
-def Prediction(model):
+def Prediction(model, X_test):
+
     y_pred = model.predict(X_test)
+    y_pred=np.asarray(y_pred)
+    with io.BytesIO() as buffer:
+        np.savetxt(buffer, y_pred, delimiter=",")
+        st.download_button(label = 'Скачать предсказания',
+                            data = buffer,
+                            file_name = 'predictions.csv',
+                            mime = 'text/csv')
 
-    threshold = 0.5
-    y_pred = (y_pred > threshold).astype(int)
 
-    st.write('Accuracy: {:.3f}'.format(accuracy_score(y_test, y_pred)))
-    st.write('Precision: {:.3f}'.format(precision_score(y_test, y_pred)))
-    st.write('Recall: {:.3f}'.format(recall_score(y_test, y_pred)))
-    st.write('F1-score: {:.3f}'.format(f1_score(y_test, y_pred)))
-    st.write('ROC-AUC: {:.3f}'.format(roc_auc_score(y_test, y_pred)))
 
 data = st.file_uploader("Выберите файл датасета", type=["csv"])
 if data is not None:
@@ -32,7 +31,7 @@ if data is not None:
     feature = st.selectbox("Выберите предсказываемый признак",df.columns)
 
     st.title("Тип модели обучения")
-    model_type = st.selectbox("Выберите тип", [ None, 'Knn', 'Kmeans','Boosting', 'Bagging','Stacking', 'MLP' ])
+    model_type = st.selectbox("Выберите тип", [ 'Knn', 'Kmeans','Boosting', 'Bagging','Stacking', 'MLP' ])
 
     button_clicked = st.button("Обработка данных и предсказание")
     if button_clicked:
@@ -63,26 +62,26 @@ if data is not None:
             if model_type == "Выберите модель":
                 st.write('Для получения предсказания')
             elif model_type == "Knn":
-                    with open('models/knn.pkl', 'rb') as file:
+                    with open('knn.pkl', 'rb') as file:
                         knn_model = pickle.load(file)
-                    Prediction(knn_model)
+                    Prediction(knn_model,X_test)
             elif model_type == "Kmeans":
-                    with open('models/kmeans.pkl', 'rb') as file:
+                    with open('kmeans.pkl', 'rb') as file:
                         kmeans_model = pickle.load(file)
-                    Prediction(kmeans_model)
+                    Prediction(kmeans_model,X_test)
             elif model_type == "Boosting":
-                    with open('models/boosting.pkl', 'rb') as file:
+                    with open('boosting.pkl', 'rb') as file:
                         boos_model = pickle.load(file)
-                    Prediction(boos_model)
+                    Prediction(boos_model,X_test)
             elif model_type == "Bagging":
-                    with open('models/bagging.pkl', 'rb') as file:
+                    with open('bagging.pkl', 'rb') as file:
                         bagg_model = pickle.load(file)
-                    Prediction(bagg_model)
+                    Prediction(bagg_model,X_test)
             elif model_type == "Stacking":
-                    with open('models/stacking.pkl', 'rb') as file:
+                    with open('stacking.pkl', 'rb') as file:
                         stac_model = pickle.load(file)
-                    Prediction(stac_model)
+                    Prediction(stac_model,X_test)
             elif model_type == "MLP":
-                    with open('models/mlp.pkl', 'rb') as file:
+                    with open('mlp.pkl', 'rb') as file:
                         mlp_model = pickle.load(file)
-                    Prediction(mlp_model)
+                    Prediction(mlp_model,X_test)
